@@ -1,10 +1,29 @@
 import { FC } from 'react';
+import { Layout } from 'antd';
+import { Header } from '@/components';
+
+const { Content, Footer } = Layout;
 
 const App: FC = () => {
   return (
-    <div>
-      <h1>HELLO WORLD</h1>
-    </div>
+    <Layout>
+      <Header />
+
+      <Content>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+      </Content>
+
+      <Footer>
+        <p>Footer</p>
+      </Footer>
+    </Layout>
   );
 };
 
