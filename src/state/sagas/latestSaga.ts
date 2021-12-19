@@ -3,8 +3,6 @@ import { fetchLatestFailure, fetchLatestSuccess } from '@/state/actions/latestAc
 import { latestActionTypes } from '@/types';
 import { getLatestLaunch } from '@/services/api';
 
-const fetchLatestLaunch = () => {};
-
 function* fetchLatestSaga() {
   try {
     const response: Promise<any> = yield call(getLatestLaunch);
