@@ -1,10 +1,32 @@
+import styled from 'styled-components';
 import { Layout } from 'antd';
+import Logo from '@/components/Logo';
 
-const Header = () => {
+const StyledHeader = styled(Layout.Header)`
+  height: 100%;
+  padding: 0 0.5rem;
+  & > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    & > h2 {
+      color: white;
+      margin: 0;
+    }
+  }
+`;
+
+const Header = (): JSX.Element => {
   return (
-    <Layout.Header>
-      <h1>HELLO WORLD</h1>
-    </Layout.Header>
+    <StyledHeader>
+      <div>
+        <Logo width={150} />
+        <h2>GIT</h2>
+      </div>
+    </StyledHeader>
   );
 };
 

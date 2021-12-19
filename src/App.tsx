@@ -1,28 +1,15 @@
 import { FC } from 'react';
 import { Layout } from 'antd';
-import { Header } from '@/components';
-
-const { Content, Footer } = Layout;
+import { Header, Content, Footer } from '@/components';
 
 const App: FC = () => {
   return (
-    <Layout>
+    <Layout style={{ minWidth: '320px' }}>
       <Header />
 
-      <Content>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-      </Content>
+      <Content />
 
-      <Footer>
-        <p>Footer</p>
-      </Footer>
+      <Footer />
     </Layout>
   );
 };
