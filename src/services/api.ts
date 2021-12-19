@@ -17,7 +17,7 @@ const getLatestLaunch = async (): Promise<any> => {
     }
     console.log(error);
     console.log(msg);
-    return error;
+    throw new Error(msg);
   }
 };
 

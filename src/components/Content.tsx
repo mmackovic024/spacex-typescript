@@ -4,13 +4,11 @@ import { useEffect, useState } from 'react';
 import { getLatestLaunch } from '@/services/api';
 
 const StyledContent = styled(Layout.Content)`
-  padding: 0 0.5rem;
-  background: url('starship-1920×1080.jpg') no-repeat center;
-  background-size: cover;
+  padding: 0;
   min-height: 85.2vh;
 
   & > div {
-    padding: 1rem 0;
+    padding: 1rem 0.5rem;
     background: rgba(0, 0, 0, 0.5);
     max-width: 1200px !important;
     margin: 0 auto;
