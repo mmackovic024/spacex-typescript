@@ -4,8 +4,11 @@ import Logo from '@/components/Logo';
 
 const StyledHeader = styled(Layout.Header)`
   background: rgba(0, 21, 41, 0.8);
-  height: 100%;
+  /* height: 100%; */
   padding: 0 0.5rem;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
   & > div {
     display: flex;
     flex-direction: row;

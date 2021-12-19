@@ -4,10 +4,10 @@ const API = axios.create({
   baseURL: process.env.PUBLIC_URL || 'https://api.spacexdata.com/v4',
 });
 
-const getLatestLaunch = async (): Promise<any> => {
+const getLatestLaunch = async () => {
   try {
-    const { data } = await API.get('/launches/latest');
-    return data || [];
+    const { data } = await API.get<any>('/launches/latest');
+    return data || null;
   } catch (error: any) {
     let msg = '';
     if (error.response?.data?.message) {

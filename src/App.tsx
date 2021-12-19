@@ -1,12 +1,12 @@
+import styled from 'styled-components';
 import { FC } from 'react';
 import { Layout } from 'antd';
 import { Header, Content, Footer } from '@/components';
-import styled from 'styled-components';
 
 const StyledLayout = styled(Layout)`
-  background: url('starship-1920×1080.jpg') no-repeat center;
+  background: url('starship-1920×1080.jpg') no-repeat fixed center;
   background-size: cover;
-  minwidth: 320px;
+  min-width: 300px;
 `;
 
 const App: FC = () => {

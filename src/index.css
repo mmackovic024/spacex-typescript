@@ -1,1 +1,14 @@
 @import '~antd/dist/antd.compact.css';
+
+.ant-card-body {
+  background: rgb(223, 240, 255);
+}
+
+.ant-card-cover {
+  padding: 5px;
+}
+
+.ant-card-hoverable:hover {
+  box-shadow: 0 1px 2px -2px rgb(255 255 255 / 16%), 0 3px 6px 0 rgb(255 255 255 / 12%),
+    0 5px 12px 4px rgb(255 255 255 / 9%);
+}
