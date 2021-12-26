@@ -4,12 +4,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/state/reducers/rootReducer';
 import { fetchLatestRequest } from '@/state/actions/latestActions';
-import { Card } from '@/components';
+import { /* Card, */ LargeCard } from '@/components';
 
 const StyledContent = styled(Layout.Content)`
   padding: 0;
   min-height: 85.2vh;
-  margin-top: 64px;
 
   & > div {
     background: rgba(0, 0, 0, 0.5);
@@ -33,12 +32,19 @@ const Content = (): JSX.Element => {
     dispatch(fetchLatestRequest());
   }, [dispatch]);
 
-  console.log({ pending, latest, error });
+  // console.log({ pending, latest, error });
 
   return (
     <StyledContent>
       <div>
-        {latest && !error && <Card cover={latest?.links?.patch?.small} title={latest?.name} />}
+        <LargeCard
+          cover={latest?.links?.patch?.small}
+          title={latest?.name}
+          details={latest?.details}
+          success={latest?.success}
+          date={latest?.date_utc}
+          pending={pending}
+        />
         <br />
         <br />
         <div>CONTENT</div>

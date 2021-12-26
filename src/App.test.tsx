@@ -1,9 +1,14 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders header, content and footer', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const gitElement = screen.getByText(/git/i);
+  expect(gitElement).toBeInTheDocument();
+
+  const CONTENTElement = screen.getByText(/CONTENT/i);
+  expect(CONTENTElement).toBeInTheDocument();
+
+  const FOOTERElement = screen.getByText(/FOOTER/i);
+  expect(FOOTERElement).toBeInTheDocument();
 });
