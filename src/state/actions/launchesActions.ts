@@ -7,9 +7,10 @@ import {
   FetchLaunchesSuccessPayload,
 } from '@/types';
 
-export const fetchLaunchesRequest = (page: number): FetchLaunchesRequest => ({
+export const fetchLaunchesRequest = (page: number, before?: string): FetchLaunchesRequest => ({
   type: launchesActionTypes.FETCH_LAUNCHES_REQUEST,
-  page: page,
+  page,
+  before,
 });
 
 export const fetchLaunchesSuccess = (payload: FetchLaunchesSuccessPayload): FetchLaunchesSuccess => ({

@@ -58,9 +58,6 @@ const StyledLargeCard = styled(Card)`
 
   & > .ant-card-head {
     background: lightcyan;
-  }
-
-  & > .ant-card-head {
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
@@ -81,7 +78,6 @@ const Content = styled.div`
 `;
 
 const LargeCard = ({ cover, title, details, date, success, error, pending = false }: MyCardProps): JSX.Element => {
-  console.log({ error });
   return (
     <StyledLargeCard bordered={false} hoverable title={title}>
       <Row gutter={[8, 8]} justify='center' align='middle'>

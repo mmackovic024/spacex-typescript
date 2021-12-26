@@ -3,6 +3,7 @@ import axios from 'axios';
 type LaunchesQuery = {
   page?: number;
   limit?: number;
+  before?: string;
 };
 
 const API = axios.create({
@@ -43,11 +44,12 @@ const getNextLaunch = async () => {
   }
 };
 
-const getLaunches = async ({ page, limit = 20 }: LaunchesQuery) => {
+const getLaunches = async ({ page, limit = 20, before }: LaunchesQuery) => {
   try {
     const query = {
       query: {
         success: { $ne: null },
+        date_utc: { $lt: new Date().toISOString() },
       },
       options: {
         sort: {
@@ -65,8 +67,11 @@ const getLaunches = async ({ page, limit = 20 }: LaunchesQuery) => {
       },
     };
 
+    if (before) {
+      query.query.date_utc.$lt = before;
+    }
+
     const { data } = await API.post<any>('/launches/query', query);
-    data.docs.shift();
     return data || null;
   } catch (error: any) {
     let msg = '';

@@ -46,11 +46,21 @@ const StyledCard = styled(Card)`
   &:hover {
     box-shadow: 0 6px 10px -2px rgb(255 255 255 / 16%), 0 6px 10px 0 rgb(255 255 255 / 12%),
       0 15px 12px 8px rgb(255 255 255 / 9%);
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 
   &:active {
-    transform: scale(1.04);
+    transform: scale(1.03);
+  }
+
+  & > .ant-card-body {
+    background: white;
+  }
+
+  .ant-card-meta-description,
+  .ant-card-head-title {
+    font-size: 0.875rem;
+    text-align: center;
   }
 `;
 
@@ -66,7 +76,7 @@ const CustomCard = ({ cover, title, success }: CardProps): JSX.Element => {
           marginBottom: '8px',
         }}
       >
-        <img height={160} alt={title} src={cover} />
+        <img height={160} alt={title} src={cover || placeholder} />
       </div>
       <Card.Meta
         description={

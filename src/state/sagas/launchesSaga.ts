@@ -4,10 +4,9 @@ import { launchesActionTypes } from '@/types';
 import { getLaunches } from '@/services/api';
 
 function* fetchLaunchesSaga(action: any) {
-  const { page } = action;
-  console.log('fetchLaunchesSaga action =', action);
+  const { page, before } = action;
   try {
-    const response: Promise<any> = yield call(getLaunches, { page });
+    const response: Promise<any> = yield call(getLaunches, { page, before });
 
     yield put(
       fetchLaunchesSuccess({

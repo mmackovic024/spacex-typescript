@@ -104,6 +104,7 @@ export interface FetchLaunchesFailurePayload {
 export interface FetchLaunchesRequest {
   type: typeof launchesActionTypes.FETCH_LAUNCHES_REQUEST;
   page: number;
+  before?: string;
 }
 
 export type FetchLaunchesSuccess = {

@@ -56,10 +56,13 @@ const Content = (): JSX.Element => {
   useEffect(() => {
     dispatch(fetchLatestRequest());
     dispatch(fetchNextRequest());
-    dispatch(fetchLaunchesRequest(2));
   }, [dispatch]);
 
-  console.log({ launches });
+  useEffect(() => {
+    if (latest.latest?.date_utc) {
+      dispatch(fetchLaunchesRequest(1, latest.latest.date_utc));
+    }
+  }, [dispatch, latest.latest?.date_utc]);
 
   return (
     <>
