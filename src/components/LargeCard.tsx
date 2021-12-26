@@ -73,6 +73,10 @@ const StyledLargeCard = styled(Card)`
 const Content = styled.div`
   font-size: 1rem;
   margin-top: 0.5rem;
+
+  & > div {
+    padding-right: 1rem;
+  }
 `;
 
 const LargeCard = ({ cover, title, details, date, success, error, pending = false }: MyCardProps): JSX.Element => {
@@ -89,7 +93,7 @@ const LargeCard = ({ cover, title, details, date, success, error, pending = fals
             {(pending || !details) && !error && <Skeleton />}
             {!pending && error && <p>{error}</p>}
             {!pending && !error && details && (
-              <>
+              <div>
                 <p>{details}</p>
                 <p>
                   Launch time:
@@ -102,7 +106,7 @@ const LargeCard = ({ cover, title, details, date, success, error, pending = fals
                     {success ? 'success' : 'failure'}
                   </strong>
                 </p>
-              </>
+              </div>
             )}
           </Content>
         </Col>
