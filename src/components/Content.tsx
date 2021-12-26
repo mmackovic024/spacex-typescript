@@ -31,13 +31,17 @@ const NextLaunch = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0.5rem;
-    background: #b3f0ff;
-    color: black;
+    background: rgba(0, 204, 255, 0.2);
+    color: white;
     font-size: 1rem;
 
     & > p,
     strong {
       margin: 0 0 0 1.5rem;
+    }
+
+    @media only screen and (max-width: 692px) {
+      flex-direction: column;
     }
   }
 `;
@@ -55,9 +59,10 @@ const Content = (): JSX.Element => {
   return (
     <StyledContent>
       <NextLaunch className='next'>
-        <p>Next launch: </p>
+        <p>Next mission: </p>
+        <strong>{next.next?.name},</strong>
+        <p>Launch date: </p>
         <strong>
-          {next.next?.name},
           {next.next?.date_utc
             ? ` ${new Date(next.next.date_utc).toLocaleString('us', { dateStyle: 'long', timeStyle: 'medium' })}`
             : null}
