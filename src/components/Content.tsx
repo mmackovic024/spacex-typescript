@@ -57,10 +57,10 @@ const Content = (): JSX.Element => {
   }, [dispatch]);
 
   return (
-    <StyledContent>
+    <>
       <NextLaunch className='next'>
         <p>Next mission: </p>
-        <strong>{next.next?.name},</strong>
+        <strong>{next.next?.name}</strong>
         <p>Launch date: </p>
         <strong>
           {next.next?.date_utc
@@ -68,79 +68,80 @@ const Content = (): JSX.Element => {
             : null}
         </strong>
       </NextLaunch>
-
-      <div>
-        <LargeCard
-          cover={latest.latest?.links?.patch?.small}
-          title={latest.latest?.name}
-          details={latest.latest?.details}
-          success={latest.latest?.success}
-          date={latest.latest?.date_utc}
-          error={latest.error}
-          pending={latest.pending}
-        />
-        <br />
-        <br />
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <br />
-        <br />
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <br />
-        <br />
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <br />
-        <br />
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <br />
-        <br />
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <br />
-        <br />
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-        <div>CONTENT</div>
-      </div>
-    </StyledContent>
+      <StyledContent>
+        <div>
+          <LargeCard
+            cover={latest.latest?.links?.patch?.small}
+            title={latest.latest?.name}
+            details={latest.latest?.details}
+            success={latest.latest?.success}
+            date={latest.latest?.date_utc}
+            error={latest.error}
+            pending={latest.pending}
+          />
+          <br />
+          <br />
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <br />
+          <br />
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <br />
+          <br />
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <br />
+          <br />
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <br />
+          <br />
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <br />
+          <br />
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+          <div>CONTENT</div>
+        </div>
+      </StyledContent>
+    </>
   );
 };
 
