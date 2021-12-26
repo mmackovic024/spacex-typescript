@@ -1,3 +1,6 @@
+/**
+ * latest launch
+ */
 export enum latestActionTypes {
   FETCH_LATEST_REQUEST = 'FETCH_LATEST_REQUEST',
   FETCH_LATEST_SUCCESS = 'FETCH_LATEST_SUCCESS',
@@ -34,6 +37,9 @@ export type FetchLatestFailure = {
 
 export type LatestActions = FetchLatestRequest | FetchLatestSuccess | FetchLatestFailure;
 
+/**
+ * next launch
+ */
 export enum nextActionTypes {
   FETCH_NEXT_REQUEST = 'FETCH_NEXT_REQUEST',
   FETCH_NEXT_SUCCESS = 'FETCH_NEXT_SUCCESS',
@@ -69,3 +75,45 @@ export type FetchNextFailure = {
 };
 
 export type NextActions = FetchNextRequest | FetchNextSuccess | FetchNextFailure;
+
+/**
+ * all launches
+ */
+export enum launchesActionTypes {
+  FETCH_LAUNCHES_REQUEST = 'FETCH_LAUNCHES_REQUEST',
+  FETCH_LAUNCHES_SUCCESS = 'FETCH_LAUNCHES_SUCCESS',
+  FETCH_LAUNCHES_FAILURE = 'FETCH_LAUNCHES_FAILURE',
+}
+
+export interface LaunchesState {
+  pending: boolean;
+  page: number;
+  hasMore: boolean;
+  data: any;
+  error: string | null;
+}
+
+export interface FetchLaunchesSuccessPayload {
+  data: any;
+}
+
+export interface FetchLaunchesFailurePayload {
+  error: string;
+}
+
+export interface FetchLaunchesRequest {
+  type: typeof launchesActionTypes.FETCH_LAUNCHES_REQUEST;
+  page: number;
+}
+
+export type FetchLaunchesSuccess = {
+  type: typeof launchesActionTypes.FETCH_LAUNCHES_SUCCESS;
+  payload: FetchLaunchesSuccessPayload;
+};
+
+export type FetchLaunchesFailure = {
+  type: typeof launchesActionTypes.FETCH_LAUNCHES_FAILURE;
+  payload: FetchLaunchesFailurePayload;
+};
+
+export type LaunchesActions = FetchLaunchesRequest | FetchLaunchesSuccess | FetchLaunchesFailure;

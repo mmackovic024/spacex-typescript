@@ -1,4 +1,5 @@
-import { Card, Image } from 'antd';
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { Card, Tag } from 'antd';
 import styled from 'styled-components';
 
 const placeholder = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMIAAADDCAYAAADQvc6UAAABRWlDQ1BJQ0MgUHJvZmlsZQAA
@@ -34,12 +35,13 @@ wGgKKC4YMA4TAAAAABJRU5ErkJggg==`;
 interface CardProps {
   cover?: string;
   title?: string;
+  success?: boolean;
 }
 
 const StyledCard = styled(Card)`
   width: 200px;
+  height: 250px;
   transition: transform 0.2s ease-in-out;
-  margin: 0.5rem;
 
   &:hover {
     box-shadow: 0 6px 10px -2px rgb(255 255 255 / 16%), 0 6px 10px 0 rgb(255 255 255 / 12%),
@@ -52,14 +54,27 @@ const StyledCard = styled(Card)`
   }
 `;
 
-const CustomCard = ({ cover, title }: CardProps): JSX.Element => {
+const CustomCard = ({ cover, title, success }: CardProps): JSX.Element => {
   return (
-    <StyledCard
-      bordered={false}
-      hoverable
-      cover={<Image preview={false} alt={title} src={cover} fallback={placeholder} />}
-    >
-      <Card.Meta title={title} style={{ textAlign: 'center' }} />
+    <StyledCard bordered={false} hoverable title={title}>
+      <div
+        style={{
+          height: '180px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '8px',
+        }}
+      >
+        <img height={160} alt={title} src={cover} />
+      </div>
+      <Card.Meta
+        description={
+          <Tag icon={success ? <CheckCircleOutlined /> : <CloseCircleOutlined />} color={success ? 'green' : 'red'}>
+            {success ? 'SUCCESS' : 'FAILURE'}
+          </Tag>
+        }
+      />
     </StyledCard>
   );
 };

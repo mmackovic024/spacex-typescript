@@ -1,4 +1,5 @@
-import { Card, CardProps, Image, Skeleton, Row, Col } from 'antd';
+import { Card, CardProps, Image, Skeleton, Row, Col, Tag } from 'antd';
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
 const placeholder = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMIAAADDCAYAAADQvc6UAAABRWlDQ1BJQ0MgUHJvZmlsZQAA
@@ -100,11 +101,13 @@ const LargeCard = ({ cover, title, details, date, success, error, pending = fals
                   <strong> {new Date(date).toLocaleString('us', { dateStyle: 'long', timeStyle: 'medium' })}</strong>
                 </p>
                 <p>
-                  Status:
-                  <strong style={{ color: success ? 'green' : 'red', textTransform: 'uppercase' }}>
-                    {' '}
-                    {success ? 'success' : 'failure'}
-                  </strong>
+                  <span style={{ marginRight: '1rem' }}>Status:</span>
+                  <Tag
+                    icon={success ? <CheckCircleOutlined /> : <CloseCircleOutlined />}
+                    color={success ? 'green' : 'red'}
+                  >
+                    {success ? 'SUCCESS' : 'FAILURE'}
+                  </Tag>
                 </p>
               </div>
             )}

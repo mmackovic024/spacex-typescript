@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/state/reducers/rootReducer';
 import { fetchLatestRequest } from '@/state/actions/latestActions';
 import { fetchNextRequest } from '@/state/actions/nextActions';
-import { /* Card, */ LargeCard } from '@/components';
+import { fetchLaunchesRequest } from '@/state/actions/launchesActions';
+import { Card, LargeCard } from '@/components';
 
 const StyledContent = styled(Layout.Content)`
   padding: 0;
@@ -50,11 +51,15 @@ const Content = (): JSX.Element => {
   const dispatch = useDispatch();
   const latest = useSelector((state: RootState) => state.latest);
   const next = useSelector((state: RootState) => state.next);
+  const launches = useSelector((state: RootState) => state.launches);
 
   useEffect(() => {
     dispatch(fetchLatestRequest());
     dispatch(fetchNextRequest());
+    dispatch(fetchLaunchesRequest(2));
   }, [dispatch]);
+
+  console.log({ launches });
 
   return (
     <>
@@ -68,6 +73,7 @@ const Content = (): JSX.Element => {
             : null}
         </strong>
       </NextLaunch>
+
       <StyledContent>
         <div>
           <LargeCard
@@ -79,66 +85,18 @@ const Content = (): JSX.Element => {
             error={latest.error}
             pending={latest.pending}
           />
+
           <br />
+          <Row gutter={[16, 32]} justify='space-between'>
+            {!launches.error &&
+              launches.data?.length > 0 &&
+              launches.data.map((launch: any, index: number) => (
+                <Col key={index}>
+                  <Card cover={launch.links?.patch?.small} title={launch.name} success={launch.success} />
+                </Col>
+              ))}
+          </Row>
           <br />
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <br />
-          <br />
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <br />
-          <br />
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <br />
-          <br />
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <br />
-          <br />
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <br />
-          <br />
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
-          <div>CONTENT</div>
         </div>
       </StyledContent>
     </>
