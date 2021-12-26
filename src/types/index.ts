@@ -33,3 +33,39 @@ export type FetchLatestFailure = {
 };
 
 export type LatestActions = FetchLatestRequest | FetchLatestSuccess | FetchLatestFailure;
+
+export enum nextActionTypes {
+  FETCH_NEXT_REQUEST = 'FETCH_NEXT_REQUEST',
+  FETCH_NEXT_SUCCESS = 'FETCH_NEXT_SUCCESS',
+  FETCH_NEXT_FAILURE = 'FETCH_NEXT_FAILURE',
+}
+
+export interface NextState {
+  pending: boolean;
+  next: any;
+  error: string | null;
+}
+
+export interface FetchNextSuccessPayload {
+  next: any;
+}
+
+export interface FetchNextFailurePayload {
+  error: string;
+}
+
+export interface FetchNextRequest {
+  type: typeof nextActionTypes.FETCH_NEXT_REQUEST;
+}
+
+export type FetchNextSuccess = {
+  type: typeof nextActionTypes.FETCH_NEXT_SUCCESS;
+  payload: FetchNextSuccessPayload;
+};
+
+export type FetchNextFailure = {
+  type: typeof nextActionTypes.FETCH_NEXT_FAILURE;
+  payload: FetchNextFailurePayload;
+};
+
+export type NextActions = FetchNextRequest | FetchNextSuccess | FetchNextFailure;

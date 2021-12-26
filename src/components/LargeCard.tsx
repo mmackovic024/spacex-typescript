@@ -36,6 +36,7 @@ interface MyCardProps extends CardProps {
   title?: string;
   details?: string;
   success: boolean;
+  error?: string | null;
   date: string;
   pending: boolean;
 }
@@ -74,7 +75,8 @@ const Content = styled.div`
   margin-top: 0.5rem;
 `;
 
-const LargeCard = ({ cover, title, details, date, success, pending = false }: MyCardProps): JSX.Element => {
+const LargeCard = ({ cover, title, details, date, success, error, pending = false }: MyCardProps): JSX.Element => {
+  console.log({ error });
   return (
     <StyledLargeCard bordered={false} hoverable title={title}>
       <Row gutter={[8, 8]} justify='center' align='middle'>
@@ -84,8 +86,9 @@ const LargeCard = ({ cover, title, details, date, success, pending = false }: My
 
         <Col md={17}>
           <Content>
-            {(pending || !details) && <Skeleton />}
-            {!pending && details && (
+            {(pending || !details) && !error && <Skeleton />}
+            {!pending && error && <p>{error}</p>}
+            {!pending && !error && details && (
               <>
                 <p>{details}</p>
                 <p>

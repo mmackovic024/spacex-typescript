@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/state/reducers/rootReducer';
 import { fetchLatestRequest } from '@/state/actions/latestActions';
+import { fetchNextRequest } from '@/state/actions/nextActions';
 import { /* Card, */ LargeCard } from '@/components';
 
 const StyledContent = styled(Layout.Content)`
@@ -24,27 +25,85 @@ const StyledContent = styled(Layout.Content)`
   }
 `;
 
+const NextLaunch = styled.div`
+  &.next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    background: #b3f0ff;
+    color: black;
+    font-size: 1rem;
+
+    & > p,
+    strong {
+      margin: 0 0 0 1.5rem;
+    }
+  }
+`;
+
 const Content = (): JSX.Element => {
   const dispatch = useDispatch();
-  const { pending, latest, error } = useSelector((state: RootState) => state.latest);
+  const latest = useSelector((state: RootState) => state.latest);
+  const next = useSelector((state: RootState) => state.next);
 
   useEffect(() => {
     dispatch(fetchLatestRequest());
+    dispatch(fetchNextRequest());
   }, [dispatch]);
-
-  // console.log({ pending, latest, error });
 
   return (
     <StyledContent>
+      <NextLaunch className='next'>
+        <p>Next launch: </p>
+        <strong>
+          {next.next?.name},
+          {next.next?.date_utc
+            ? ` ${new Date(next.next.date_utc).toLocaleString('us', { dateStyle: 'long', timeStyle: 'medium' })}`
+            : null}
+        </strong>
+      </NextLaunch>
+
       <div>
         <LargeCard
-          cover={latest?.links?.patch?.small}
-          title={latest?.name}
-          details={latest?.details}
-          success={latest?.success}
-          date={latest?.date_utc}
-          pending={pending}
+          cover={latest.latest?.links?.patch?.small}
+          title={latest.latest?.name}
+          details={latest.latest?.details}
+          success={latest.latest?.success}
+          date={latest.latest?.date_utc}
+          error={latest.error}
+          pending={latest.pending}
         />
+        <br />
+        <br />
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <br />
+        <br />
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <br />
+        <br />
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
+        <div>CONTENT</div>
         <br />
         <br />
         <div>CONTENT</div>
