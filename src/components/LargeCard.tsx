@@ -71,18 +71,18 @@ const StyledLargeCard = styled(Card)`
 
 const Content = styled.div`
   font-size: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 `;
 
 const LargeCard = ({ cover, title, details, date, success, pending = false }: MyCardProps): JSX.Element => {
   return (
     <StyledLargeCard bordered={false} hoverable title={title}>
-      <Row gutter={[8, 8]} justify='center'>
-        <Col md={8}>
+      <Row gutter={[8, 8]} justify='center' align='middle'>
+        <Col md={7}>
           <Image preview={false} alt={title} src={pending ? placeholder : cover} fallback={placeholder} />
         </Col>
 
-        <Col md={16}>
+        <Col md={17}>
           <Content>
             {(pending || !details) && <Skeleton />}
             {!pending && details && (
