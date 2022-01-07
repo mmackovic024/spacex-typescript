@@ -1,5 +1,6 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { Card, Tag } from 'antd';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 const placeholder = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMIAAADDCAYAAADQvc6UAAABRWlDQ1BJQ0MgUHJvZmlsZQAA
@@ -32,15 +33,17 @@ AhJyNSiECRCjUbEPNCRAhZ6NSiAARCjXbUHMCRMjZqBQiQIRCzTbUnAARcjYqhQgQoVCzDTUnQIScjUo
 gUIkCEQs021JwAEXI2KoUIEKFQsw01J0CEnI1KIQJEKNRsQ80JECFno1KIABEKNdtQcwJEyNmoFCJAhELNNtScABFyNiqFCBChULMNNSdAhJyNSiEC/
 wGgKKC4YMA4TAAAAABJRU5ErkJggg==`;
 
+export type Ref = HTMLDivElement;
+
 interface CardProps {
   cover?: string;
   title?: string;
+  date: string;
   success?: boolean;
 }
 
 const StyledCard = styled(Card)`
   width: 200px;
-  height: 250px;
   transition: transform 0.2s ease-in-out;
 
   &:hover {
@@ -53,28 +56,40 @@ const StyledCard = styled(Card)`
     transform: scale(1.03);
   }
 
-  & > .ant-card-body {
+  .ant-card-body {
     background: white;
+    padding-top: 0;
   }
 
   .ant-card-meta-description,
   .ant-card-head-title {
     font-size: 0.875rem;
     text-align: center;
+    padding-bottom: 0;
   }
 `;
 
-const CustomCard = ({ cover, title, success }: CardProps): JSX.Element => {
+const CustomCard = forwardRef<Ref, CardProps>(({ cover, success, title, date }, ref) => {
+  const titleEl = (
+    <div>
+      <span>{title}</span>
+      <span style={{ display: 'block', fontSize: '0.725rem', color: '#666' }}>
+        {new Date(date).toLocaleString('us', { dateStyle: 'short' })}
+      </span>
+    </div>
+  );
   return (
-    <StyledCard bordered={false} hoverable title={title}>
+    <StyledCard bordered={false} hoverable title={titleEl}>
       <div
         style={{
           height: '180px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          flexDirection: 'column',
           marginBottom: '8px',
         }}
+        ref={ref}
       >
         <img height={160} alt={title} src={cover || placeholder} />
       </div>
@@ -87,6 +102,6 @@ const CustomCard = ({ cover, title, success }: CardProps): JSX.Element => {
       />
     </StyledCard>
   );
-};
+});
 
 export default CustomCard;

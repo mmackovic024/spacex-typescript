@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { Layout, Row, Col } from 'antd';
-import { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useInView } from 'react-intersection-observer';
 import { RootState } from '@/state/reducers/rootReducer';
 import { fetchLatestRequest } from '@/state/actions/latestActions';
 import { fetchNextRequest } from '@/state/actions/nextActions';
 import { fetchLaunchesRequest } from '@/state/actions/launchesActions';
-import { Card, LargeCard } from '@/components';
+import { Card, LargeCard, Spinner } from '@/components';
 
 const StyledContent = styled(Layout.Content)`
   padding: 0;
@@ -48,10 +49,16 @@ const NextLaunch = styled.div`
 `;
 
 const Content = (): JSX.Element => {
+  const page = useRef(0);
   const dispatch = useDispatch();
   const latest = useSelector((state: RootState) => state.latest);
   const next = useSelector((state: RootState) => state.next);
   const launches = useSelector((state: RootState) => state.launches);
+
+  const { ref, inView } = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
 
   useEffect(() => {
     dispatch(fetchLatestRequest());
@@ -61,8 +68,16 @@ const Content = (): JSX.Element => {
   useEffect(() => {
     if (latest.latest?.date_utc) {
       dispatch(fetchLaunchesRequest(1, latest.latest.date_utc));
+      page.current += 1;
     }
   }, [dispatch, latest.latest?.date_utc]);
+
+  useEffect(() => {
+    if (inView && launches.hasMore) {
+      dispatch(fetchLaunchesRequest(page.current + 1, latest.latest?.date_utc));
+      page.current += 1;
+    }
+  }, [inView, launches.hasMore, latest.latest?.date_utc, dispatch]);
 
   return (
     <>
@@ -79,27 +94,34 @@ const Content = (): JSX.Element => {
 
       <StyledContent>
         <div>
-          <LargeCard
-            cover={latest.latest?.links?.patch?.small}
-            title={latest.latest?.name}
-            details={latest.latest?.details}
-            success={latest.latest?.success}
-            date={latest.latest?.date_utc}
-            error={latest.error}
-            pending={latest.pending}
-          />
-
-          <br />
-          <Row gutter={[16, 32]} justify='space-between'>
+          <Row gutter={[16, 16]} justify='center'>
+            <Col span={24}>
+              <LargeCard
+                cover={latest.latest?.links?.patch?.small}
+                title={latest.latest?.name}
+                details={latest.latest?.details}
+                success={latest.latest?.success}
+                date={latest.latest?.date_utc}
+                error={latest.error}
+                pending={latest.pending}
+              />
+            </Col>
             {!launches.error &&
               launches.data?.length > 0 &&
               launches.data.map((launch: any, index: number) => (
                 <Col key={index}>
-                  <Card cover={launch.links?.patch?.small} title={launch.name} success={launch.success} />
+                  <Card
+                    cover={launch.links?.patch?.small}
+                    title={launch.name}
+                    success={launch.success}
+                    date={launch.date_utc}
+                    ref={ref}
+                  />
                 </Col>
               ))}
           </Row>
           <br />
+          {launches.pending && <Spinner />}
         </div>
       </StyledContent>
     </>

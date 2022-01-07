@@ -88,6 +88,7 @@ export enum launchesActionTypes {
 export interface LaunchesState {
   pending: boolean;
   page: number;
+  totalPages?: number;
   hasMore: boolean;
   data: any;
   error: string | null;

@@ -87,11 +87,11 @@ const LargeCard = ({ cover, title, details, date, success, error, pending = fals
 
         <Col md={17}>
           <Content>
-            {(pending || !details) && !error && <Skeleton />}
+            {pending && !error && <Skeleton />}
             {!pending && error && <p>{error}</p>}
-            {!pending && !error && details && (
+            {!pending && !error && (
               <div>
-                <p>{details}</p>
+                <p>{details || 'No details available'}</p>
                 <p>
                   Launch time:
                   <strong> {new Date(date).toLocaleString('us', { dateStyle: 'long', timeStyle: 'medium' })}</strong>
